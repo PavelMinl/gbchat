@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {Message} from "./components/message";
+import {useEffect, useState} from "react";
+import {Form} from "./components/form";
+import {AUTHORS} from "./utils/constans";
 
 function App() {
+
+    const [messageLi, setMessageLi] = useState([
+        { text : "hello", author: AUTHORS.I},
+        { text : "I am BOT", author: AUTHORS.BOT},
+    ]);
+    const handMessageClick = () => {
+        console.log("test");
+    };
+
+    const handAddMessage = (text) => {
+        const newMes ={
+            text,
+            author: AUTHORS.I,
+        }
+        setMessageLi ((newMessageLi) => [...newMessageLi, newMes ])
+    };
+
+    useEffect(() => {
+        if (messageLi[messageLi.length-1].author === AUTHORS.I){
+            const newMes ={
+                text: "I AM BOT",
+                author: AUTHORS.ME,
+            };
+            setMessageLi ((newMessageLi) => [...newMessageLi, newMes ])
+        };
+    }, [messageLi]);
+
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Message text="HELLO PAVEL" />
-      </header>
+      <div className="App-header">
+          {messageLi.map ((message ) => (
+        <Message text={message.text} onMessageClick={handMessageClick}  />
+          ))}
+          <Form onSubmit={handAddMessage} />
+      </div>
     </div>
   );
 }
