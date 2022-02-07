@@ -1,4 +1,4 @@
 export const AUTHORS = {
-    I: "hello",
+    I: "Pavel",
     BOT: "BOT"
 }

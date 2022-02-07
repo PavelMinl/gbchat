@@ -1,0 +1,13 @@
+.formBtn.MuiButton-root{
+width: 100px;
+    height: 56px;
+    background-color: blue;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.formBtn.MuiButton-root:hover{
+    background-color: dodgerblue;
+transition: 0.3s;
+}
