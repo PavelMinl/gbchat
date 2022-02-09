@@ -1,0 +1,22 @@
+.App {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 40px 0;
+}
+.container{
+    max-height: 150px;
+    overflow: scroll;
+    min-width: 250px;
+    text-align: left;
+    overflow-x: hidden;
+    height: 150px;
+    border: 1px solid slategray;
+}
+.chatName{
+    font-size: 24px;
+    font-weight: 600;
+    list-style-type: none;
+}
+
