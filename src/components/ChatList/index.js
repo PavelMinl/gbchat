@@ -1,21 +1,20 @@
-import {List, ListItem} from "@mui/material";
-import {NavLink, Outlet} from "react-router-dom";
+import {List} from "@mui/material";
+import { Outlet} from "react-router-dom";
+import {ChatItem} from "./ChatItem";
+import {FormMui} from "../FormMui";
 
 
-const chatic = [
-    {name: "User1", id: "1"},
-    {name: "User2", id: "2"},
-];
 
-export const ChatList = () => (
+
+
+export const ChatList = ({ chats, onAddChat, onDeleteChat }) => (
     <>
-    <List className="chatName">
-        {chatic.map((chat) =>(
-            <ListItem key={chat.id} >
-                <NavLink to={`/chats/${chat.id}`} style={({isActive})=>({color: isActive ? "red" : "grey"})}> {chat.name}</NavLink>
-            </ListItem>
-        ))}
-    </List>
-    <Outlet />
+        <List className="chatName">
+            {chats.map((chat) => (
+                <ChatItem chat={chat} onDeleteChat={onDeleteChat} />
+            ))}
+        </List>
+        <FormMui onSubmit={onAddChat} />
+        <Outlet />
     </>
-)
+);
