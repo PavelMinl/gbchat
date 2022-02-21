@@ -6,6 +6,7 @@ import {AUTHORS} from "../../utils/constans";
 import {MessageList} from "../MessageList";
 
 import {useParams, Navigate} from "react-router-dom";
+import {FormWithLogger} from "../FormMui";
 
 
 
@@ -57,7 +58,7 @@ export function Chat(messages, addMessage) {
                 <div className="container">
                     <MessageList message={messages[chatId]}/>
                 </div>
-                <Form onSubmit={handAddMessage} />
+                <FormWithLogger onSubmit={handAddMessage} />
             </div>
 
         </div>

@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import "./style.css"
-import PropTypes from "prop-types";
 import {ThemeContext} from "../../utils/ThemeContext";
 
 export const Message = ({ text, author }) => {

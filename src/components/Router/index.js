@@ -1,11 +1,11 @@
 import {BrowserRouter, Route, Routes, NavLink} from "react-router-dom";
-import Chat from "../Chat";
+import {Chat} from "../Chat";
 import {ChatList} from "../ChatList";
 import ConnectedProfile, {Profile} from "../Profile";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addChat, deleteChat} from "../../store/store/chats/actions";
 import {ThemeContext} from "../../utils/ThemeContext";
+import {addChat, deleteChat} from "../../store/chats/actions";
 
 
 const Home = () => <h2>HOME</h2>;
@@ -24,7 +24,6 @@ const initialMessages = inititalChats.reduce((acc, el) =>{
 
 export const Router = () => {
     const [messageColor, setMessageColor] = useState("red");
-   // const {chatList,setchatList} = useState(inititalChats)
 const [messages,setMessages] = useState(initialMessages)
 
 

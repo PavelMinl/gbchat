@@ -1,17 +1,16 @@
 import {connect, shallowEqual, useDispatch, useSelector} from "react-redux";
-import {changeShowName} from "../../store/profile/action";
 import './profile.css';
 import {useContext} from "react";
 import {ThemeContext} from "@emotion/react";
-import {changeName} from "../../store/store/profile/actions";
-import {selectName, selectShowName} from "../../store/store/profile/selectors";
 import {Form} from "../Form";
+import {selectName, selectShowName} from "../../store/profile/selectors";
+import {changeName, changeShowName} from "../../store/profile/actions";
 
 export const Profile = () => {
     const { setMessageColor } = useContext(ThemeContext);
 
     const dispatch = useDispatch();
-    const showName = useSelector(selectShowName, shallowEqual);
+    const showName = useSelector(selectShowName , shallowEqual);
     const name = useSelector(selectName);
 
     const handleChangeShowName = () => {

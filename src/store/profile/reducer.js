@@ -1,19 +1,25 @@
-import {CHANGE_SHOW_NAME} from "./action";
+import { CHANGE_NAME, CHANGE_SHOW_NAME } from "./actions";
 
-export const initialState = {
-    name: "Default",
-    showName: false,
-}
+const initialState = {
+  name: "Default",
+  showName: true,
+};
 
 export const profileReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case CHANGE_SHOW_NAME : {
-            return {
-                ...state,
-                showName: !state.showName,
-            };
-        }
-        default:
-            return state;
+  switch (action.type) {
+    case CHANGE_SHOW_NAME: {
+      return {
+        ...state,
+        showName: !state.showName,
+      };
     }
+    case CHANGE_NAME: {
+      return {
+        ...state,
+        name: action.name,
+      };
+    }
+    default:
+      return state;
+  }
 };
