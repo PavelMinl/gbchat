@@ -1,19 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./style.css"
-import PropTypes from "prop-types";
+import {ThemeContext} from "../../utils/ThemeContext";
 
-export class Message extends React.Component {
-    render() {
-        const {text, author} = this.props;
-        return (
-            <div>
-        <span className="chatText">{author}: {text}</span>
-            </div>
-        );
-    };
+export const Message = ({ text, author }) => {
+    const { messageColor } = useContext(ThemeContext);
+    return (
+        <div>
+      <span className="chatText" style={{ color: messageColor }}>
+        {author}: {text}
+      </span>
+        </div>
+    );
 };
 
+/*
 Message.propTypes = {
     text: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-}
+}*/

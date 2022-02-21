@@ -1,26 +1,23 @@
 
 import './chat.css';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {Form} from "../Form";
 import {AUTHORS} from "../../utils/constans";
 import {MessageList} from "../MessageList";
 
 import {useParams, Navigate} from "react-router-dom";
+import {FormWithLogger} from "../FormMui";
 
 
 
 
 
-export function Chat() {
+export function Chat(messages, addMessage) {
 
-    const {chatid} = useParams()
+    const params = useParams();
+    const { chatId } = params;
 
-    const [messageLi, setMessageLi] = useState({
-        1:[],
-        2:[],
-    });
     const messageEnd = useRef();
-
 
     const handAddMessage = (text) => {
         if (text !== "")
@@ -28,21 +25,18 @@ export function Chat() {
     };
 
     const sendMessage = (text, author) => {
-        const newMes ={
+        const newMsg ={
             text,
             author,
             id: `message-${Date.now()}`
         }
-        setMessageLi ((newMessageLi) => ({
-            ...newMessageLi,
-[chatid]: [...newMessageLi[chatid], newMes ],
-        }));
+        addMessage (chatId, newMsg);
     };
 
     useEffect(() => {
         messageEnd.current?.scrollIntoView();
         let timeout;
-        if (messageLi[chatid]?.[messageLi[chatid]?.length-1]?.author === AUTHORS.I){
+        if (messages[chatId]?.[messages[chatId]?.length-1]?.author === AUTHORS.I){
             timeout = setTimeout (() => {
                 sendMessage("Hello, I`m bot", AUTHORS.BOT)
             }, 1000)
@@ -51,9 +45,9 @@ export function Chat() {
         return () => {
             clearTimeout(timeout);
         }
-    }, [messageLi]);
+    }, [messages]);
 
-    if(!messageLi[chatid]) {
+    if(!messages[chatId]) {
         return <Navigate to="/chats" replace />
     }
 
@@ -62,9 +56,9 @@ export function Chat() {
         <div className="App">
             <div>
                 <div className="container">
-                    <MessageList message={messageLi[chatid]}/>
+                    <MessageList message={messages[chatId]}/>
                 </div>
-                <Form onSubmit={handAddMessage} />
+                <FormWithLogger onSubmit={handAddMessage} />
             </div>
 
         </div>

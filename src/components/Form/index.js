@@ -24,7 +24,7 @@ const textField = useRef()
 
     return (
         <form onSubmit={handSubmit}>
-            <TextField value={value} inputRef={textField} onChange={handChange} type="text" />
+            <TextField value={value} ref={textField} onChange={handChange} type="text" />
             <Button className="formBtn" type="submit">Send</Button>
         </form>
     );
