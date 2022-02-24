@@ -5,6 +5,8 @@ import {ThemeContext} from "@emotion/react";
 import {Form} from "../Form";
 import {selectName, selectShowName} from "../../store/profile/selectors";
 import {changeName, changeShowName} from "../../store/profile/actions";
+import {usePrev} from "../../utils/usePrev";
+import {logout} from "../../services/firebase";
 
 export const Profile = () => {
     const { setMessageColor } = useContext(ThemeContext);
@@ -52,17 +54,25 @@ export const ProfileToConnect = ({ showName, name, setName, setShowName }) => {
     const handleClick = () => {
         setMessageColor((prevColor) => (prevColor === "red" ? "blue" : "red"));
     };
-
+    const prevShowName = usePrev(showName);
     const handleChangeName = (text) => {
-        // dispatch(changeName(text));
         setName(text);
     };
-
+    const handleLogout = async () => {
+        try {
+            await logout();
+        } catch (e) {
+            console.warn(e);
+        }
+    };
     return (
         <>
             <h3>Profile</h3>
             <div>
-                <button onClick={handleClick}>Change theme</button>
+                <button onClick={handleLogout}>login</button>
+            </div>
+            <div>
+                <button onClick={handleClick}>change</button>
             </div>
             <div>
                 {showName && <span>{name}</span>}
