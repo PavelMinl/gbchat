@@ -7,16 +7,19 @@ import {MessageList} from "../MessageList";
 
 import {useParams, Navigate} from "react-router-dom";
 import {FormWithLogger} from "../FormMui";
+import {useDispatch, useSelector} from "react-redux";
+import {selectMessages} from "../../store/messages/selectors";
+import {addMessageWithThunk} from "../../store/messages/actions";
 
 
 
 
 
-export function Chat(messages, addMessage) {
+export function Chat() {
 
-    const params = useParams();
-    const { chatId } = params;
-
+    const {chatId} = useParams();
+    const messages = useSelector(selectMessages)
+ const dispatch = useDispatch()
     const messageEnd = useRef();
 
     const handAddMessage = (text) => {
@@ -30,26 +33,17 @@ export function Chat(messages, addMessage) {
             author,
             id: `message-${Date.now()}`
         }
-        addMessage (chatId, newMsg);
+       dispatch(addMessageWithThunk(chatId, newMsg))
     };
 
     useEffect(() => {
         messageEnd.current?.scrollIntoView();
-        let timeout;
-        if (messages[chatId]?.[messages[chatId]?.length-1]?.author === AUTHORS.I){
-            timeout = setTimeout (() => {
-                sendMessage("Hello, I`m bot", AUTHORS.BOT)
-            }, 1000)
-        };
-
-        return () => {
-            clearTimeout(timeout);
-        }
     }, [messages]);
 
-    if(!messages[chatId]) {
-        return <Navigate to="/chats" replace />
+    if (!messages[chatId]) {
+        return <Navigate to="/chats" replace />;
     }
+
 
     return (
 
@@ -64,5 +58,3 @@ export function Chat(messages, addMessage) {
         </div>
     );
 }
-
-export default Chat;
