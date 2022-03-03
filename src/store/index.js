@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from "redux";
+import {createStore, combineReducers, applyMiddleware, compose} from "redux";
 import { profileReducer } from "./profile/reducer";
 import { chatsReducer } from "./chats/reducer";
 import {persistReducer, persistStore} from "redux-persist";

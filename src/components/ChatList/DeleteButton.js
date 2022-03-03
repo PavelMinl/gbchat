@@ -1,9 +1,12 @@
 import { useCallback } from "react";
+import { remove } from "@firebase/database";
+import {getChatsRefById} from "../../services/firebase";
 
-export const DeleteButton = ({ id, onClick }) => {
-  const handleClick = useCallback(() => {
-    onClick(id);
-  }, [onClick, id]);
-  
-  return <div onClick={handleClick}>X</div>;
+export const DeleteButton = ({ id }) => {
+
+  const handleDeleteChat = () => {
+    remove (getChatsRefById (id));
+  };
+
+  return <div onClick={handleDeleteChat}>X</div>;
 };

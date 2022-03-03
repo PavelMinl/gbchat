@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticles } from "../../store/articles/actions";
 import {
@@ -7,7 +7,6 @@ import {
   selectArticlesLoading,
   selectError,
 } from "../../store/articles/selectors";
-import { apiUrl } from "../../utils/constants";
 
 export const Articles = () => {
   const dispatch = useDispatch();

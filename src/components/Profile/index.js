@@ -1,12 +1,19 @@
 import {connect, shallowEqual, useDispatch, useSelector} from "react-redux";
 import './profile.css';
-import {useContext} from "react";
+import { useContext,  useState } from "react";
+import { set } from "@firebase/database";
 import {ThemeContext} from "@emotion/react";
 import {Form} from "../Form";
 import {selectName, selectShowName} from "../../store/profile/selectors";
 import {changeName, changeShowName} from "../../store/profile/actions";
 import {usePrev} from "../../utils/usePrev";
-import {logout} from "../../services/firebase";
+import {
+    auth,
+    getProfileNameRef,
+    logout,
+    profileShowNameRef,
+} from "../../services/firebase";
+
 
 export const Profile = () => {
     const { setMessageColor } = useContext(ThemeContext);
@@ -43,12 +50,13 @@ export const Profile = () => {
     );
 };
 
-export const ProfileToConnect = ({ showName, name, setName, setShowName }) => {
+export const ProfileToConnect = () => {
     const { setMessageColor } = useContext(ThemeContext);
+    const [name, setName] = useState ("");
+    const [showName, setShowName] = useState(false);
 
     const handleChangeShowName = () => {
-        // dispatch(changeShowName);
-        setShowName();
+        set(profileShowNameRef , !showName);
     };
 
     const handleClick = () => {
@@ -56,7 +64,8 @@ export const ProfileToConnect = ({ showName, name, setName, setShowName }) => {
     };
     const prevShowName = usePrev(showName);
     const handleChangeName = (text) => {
-        setName(text);
+        console.log(auth.currentUser);
+        set(getProfileNameRef(auth.currentUser.uid), text);
     };
     const handleLogout = async () => {
         try {

@@ -1,4 +1,5 @@
-import { FETCH_STATUSES } from "../../utils/constants";
+import {FETCH_STATUSES} from "../../utils/constans";
+
 
 export const selectArticles = (state) => state.articles.data;
 export const selectArticlesLoading = (state) =>

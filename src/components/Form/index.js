@@ -1,5 +1,4 @@
 import {useEffect, useRef, useState} from "react";
-import {Button, TextField} from "@mui/material";
 
 import "./style.css"
 
@@ -8,11 +7,11 @@ export const Form = ({onSubmit}) => {
 const textField = useRef()
 
 
-    const handChange = (e) => {
+    const handleChange = (e) => {
       setValue(e.target.value);
     };
 
-    const handSubmit = (e) => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       onSubmit(value);
       setValue("")
@@ -23,9 +22,14 @@ const textField = useRef()
     }, [])
 
     return (
-        <form onSubmit={handSubmit}>
-            <TextField value={value} ref={textField} onChange={handChange} type="text" />
-            <Button className="formBtn" type="submit">Send</Button>
+        <form onSubmit={handleSubmit}>
+            <input
+                value={value}
+                ref={textField}
+                onChange={handleChange}
+                type="text"
+            />
+            <input type="submit" />
         </form>
     );
 };

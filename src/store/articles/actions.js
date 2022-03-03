@@ -1,4 +1,5 @@
-import { apiUrl } from "../../utils/constants";
+import {apiUrl} from "../../utils/constans";
+
 
 export const GET_ARTICLES_REQUEST = "ARTICLES::GET_ARTICLES_REQUEST";
 export const GET_ARTICLES_SUCCESS = "ARTICLES::GET_ARTICLES_SUCCESS";
@@ -22,7 +23,7 @@ export const getArticles = () => async (dispatch) => {
   dispatch(getArticlesRequest());
 
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl );
     if (!response.ok) {
       throw new Error(response.status);
     }
