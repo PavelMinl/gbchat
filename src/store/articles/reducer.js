@@ -1,9 +1,10 @@
-import { FETCH_STATUSES } from "../../utils/constants";
+
 import {
   GET_ARTICLES_FAILURE,
   GET_ARTICLES_REQUEST,
   GET_ARTICLES_SUCCESS,
 } from "./actions";
+import {FETCH_STATUSES} from "../../utils/constans";
 
 const initialState = {
   data: [],
